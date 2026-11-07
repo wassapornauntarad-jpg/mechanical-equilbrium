@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ภารกิจพิชิตสมดุลกล | ฟิสิกส์ ม.4</title>
+<style>
+:root{--navy:#10243e;--blue:#176b87;--cyan:#bdeaf0;--gold:#ffd166;--cream:#f7f8f4;--ink:#183044;--green:#23865b;--red:#c34e4e}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#e9f7f7,#f8f2df);font-family:Tahoma,"Noto Sans Thai",sans-serif;color:var(--ink)}
+header{background:linear-gradient(110deg,#10243e,#176b87);color:white;padding:25px 5vw 22px}
+header .tag{letter-spacing:2px;color:#bdeaf0;font-size:12px;font-weight:bold}
+h1{margin:8px 0;font-size:clamp(25px,4vw,39px)}header p{margin:5px 0;max-width:850px;line-height:1.7}
+main{max-width:1100px;margin:22px auto;padding:0 16px 45px}.panel{background:white;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 8px 24px #17344b12}
+h2{margin:0 0 12px;color:#14516b;font-size:22px}.sub{color:#587080;line-height:1.7}
+.story{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
+.scene{background:#eaf7fa;border-radius:16px;padding:14px;min-height:230px;display:flex;align-items:center;justify-content:center}
+.scene svg{width:100%;max-width:480px}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+label{font-weight:bold;font-size:14px;display:block;margin-bottom:7px}
+input[type=range]{width:100%;accent-color:#176b87}
+.value{font-weight:bold;color:#176b87}
+button{border:0;border-radius:11px;background:#176b87;color:white;padding:11px 16px;font-weight:bold;cursor:pointer;margin:5px 5px 0 0}
+button.secondary{background:#e7f2f4;color:#14516b}button.gold{background:#e8a92b;color:#243448}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.metric{background:#f0f7f8;border-radius:12px;padding:12px;text-align:center}.metric strong{display:block;font-size:22px;color:#14516b;margin-top:4px}
+.status{padding:12px;border-radius:12px;background:#fff5d9;font-weight:bold;margin-top:12px}
+.status.good{background:#e3f6eb;color:#17613f}.status.bad{background:#fdeaea;color:#963d3d}
+canvas{width:100%;height:220px;border:1px solid #dce8eb;border-radius:12px;background:#fbfdfd}
+.task{border-left:4px solid var(--gold);padding:9px 13px;background:#fffaf0;border-radius:0 10px 10px 0;line-height:1.7}
+.quiz-q{padding:14px 0;border-bottom:1px solid #e6edef}.quiz-q:last-child{border:0}
+.quiz-q p{font-weight:bold;margin:0 0 9px}.quiz-q label{font-weight:normal;margin:7px 0;display:flex;gap:8px;align-items:flex-start}
+#result{font-weight:bold;margin-top:10px;color:#17613f}
+footer{text-align:center;color:#66808b;font-size:12px;padding:15px}
+@media(max-width:720px){.story{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+ <div class="tag">PHYSICS M.4 • INTERACTIVE MISSION</div>
+ <h1>ภารกิจพิชิตสมดุลกล</h1>
+ <p>สถานการณ์จำลอง: ทีมวิศวกรรุ่นเยาว์ต้องปรับคานกระดกให้สมดุล เพื่อช่วยส่งกล่องอุปกรณ์ข้ามพื้นที่ทดลอง
+ นักเรียนทดลองปรับมวลและระยะจากจุดหมุน สังเกตการเอียง วิเคราะห์โมเมนต์ และสรุปเงื่อนไขสมดุล</p>
+</header>
+<main>
+<section class="panel">
+ <h2>🎯 เป้าหมายการเรียนรู้</h2>
+ <p class="sub">1) ทดลองปรับมวลและระยะของวัตถุบนคาน 2) สังเกตทิศทางการหมุนและตำแหน่งสมดุล 3) วิเคราะห์ความสัมพันธ์ระหว่างแรง ระยะตั้งฉาก และโมเมนต์ของแรง</p>
+ <div class="task"><b>กติกาภารกิจ:</b> ปรับค่าทางซ้ายและขวาให้คานอยู่ในแนวระดับ โดยพิจารณาผลของโมเมนต์ทั้งสองด้าน ไม่ใช่ดูมวลเพียงอย่างเดียว</div>
+</section>
+
+<section class="panel">
+ <h2>🎮 ด่านที่ 1 — ห้องทดลองคานกระดก</h2>
+ <div class="story">
+  <div>
+   <p class="sub">คานมีจุดหมุนอยู่ตรงกลาง วัตถุแต่ละด้านออกแรงเนื่องจากน้ำหนัก ทำให้เกิดโมเมนต์รอบจุดหมุน ลองเปลี่ยนค่าด้านล่างแล้วสังเกตภาพเคลื่อนไหวแบบทันที</p>
+   <div class="controls">
+    <div><label>มวลด้านซ้าย: <span class="value" id="mlv">2.0</span> kg</label><input id="ml" type="range" min="0.5" max="8" step="0.5" value="2"></div>
+    <div><label>ระยะด้านซ้าย: <span class="value" id="llv">1.5</span> m</label><input id="ll" type="range" min="0.2" max="2.5" step="0.1" value="1.5"></div>
+    <div><label>มวลด้านขวา: <span class="value" id="mrv">3.0</span> kg</label><input id="mr" type="range" min="0.5" max="8" step="0.5" value="3"></div>
+    <div><label>ระยะด้านขวา: <span class="value" id="lrv">1.0</span> m</label><input id="lr" type="range" min="0.2" max="2.5" step="0.1" value="1"></div>
+   </div>
+   <button onclick="setChallenge()">สุ่มโจทย์ภารกิจ</button>
+   <button class="secondary" onclick="resetSim()">เริ่มใหม่</button>
+  </div>
+  <div class="scene">
+   <svg viewBox="0 0 480 250" role="img" aria-label="ภาพจำลองคานกระดก">
+    <line x1="25" y1="205" x2="455" y2="205" stroke="#9bb8c0" stroke-width="3"/>
+    <polygon points="240,155 205,207 275,207" fill="#e7a92b" stroke="#9b6a18" stroke-width="2"/>
+    <g id="beam" transform="rotate(0 240 155)">
+     <rect x="55" y="145" width="370" height="15" rx="7" fill="#176b87"/>
+     <rect id="leftBox" x="92" y="105" width="42" height="40" rx="6" fill="#e8a92b" stroke="#9b6a18" stroke-width="2"/>
+     <rect id="rightBox" x="346" y="105" width="42" height="40" rx="6" fill="#db6b57" stroke="#9d4435" stroke-width="2"/>
+     <text id="leftMass" x="113" y="130" font-size="13" text-anchor="middle" font-weight="bold" fill="#243448">2 kg</text>
+     <text id="rightMass" x="367" y="130" font-size="13" text-anchor="middle" font-weight="bold" fill="white">3 kg</text>
+    </g>
+    <circle cx="240" cy="155" r="7" fill="#10243e"/>
+    <text x="240" y="230" text-anchor="middle" font-size="13" fill="#526e7a">จุดหมุน</text>
+    <text x="95" y="80" font-size="13" fill="#8a641c">ด้านซ้าย</text><text x="350" y="80" font-size="13" fill="#9d4435">ด้านขวา</text>
+   </svg>
+  </div>
+ </div>
+ <div class="metrics">
+  <div class="metric">โมเมนต์ซ้าย<strong id="tl">29.4 N·m</strong></div>
+  <div class="metric">โมเมนต์ขวา<strong id="tr">29.4 N·m</strong></div>
+  <div class="metric">ผลต่างโมเมนต์<strong id="diff">0.0 N·m</strong></div>
+ </div>
+ <div id="status" class="status good">คานสมดุลการหมุน — โมเมนต์ตามเข็มเท่ากับโมเมนต์ทวนเข็ม</div>
+</section>
+
+<section class="panel">
+ <h2>📈 ด่านที่ 2 — กราฟเปรียบเทียบโมเมนต์</h2>
+ <p class="sub">กราฟแท่งแสดงขนาดโมเมนต์ของแรงแต่ละด้าน เปลี่ยนค่าจากห้องทดลองแล้วกราฟจะอัปเดตทันที</p>
+ <canvas id="chart" width="900" height="250"></canvas>
+ <p class="sub" id="analysis">ข้อสังเกต: โมเมนต์ขึ้นอยู่กับทั้งขนาดแรงและระยะตั้งฉากจากจุดหมุน</p>
+</section>
+
+<section class="panel">
+ <h2>🧩 ด่านที่ 3 — ภารกิจสถานการณ์</h2>
+ <div class="task">
+  <b>สถานการณ์:</b> นักเรียนสองคนเล่นคานกระดก คนทางซ้ายมีมวล 30 kg นั่งห่างจุดหมุน 1.2 m
+  คนทางขวามีมวล 40 kg หากต้องการให้คานสมดุล คนทางขวาควรนั่งห่างจุดหมุนเท่าใด (สมมติ g เท่ากัน)
+ </div>
+ <button class="gold" onclick="showHint()">ขอคำใบ้</button>
+ <button onclick="showSolution()">ดูแนวคิดเฉลย</button>
+ <p id="hint" class="sub"></p>
+ <p id="solution" class="sub"></p>
+</section>
+
+<section class="panel">
+ <h2>📝 แบบประเมินท้ายกิจกรรม (3 ข้อ)</h2>
+ <div class="quiz-q"><p>1. เงื่อนไขของสมดุลต่อการหมุนคือข้อใด</p>
+  <label><input type="radio" name="q1" value="a"> โมเมนต์ตามเข็มเท่ากับโมเมนต์ทวนเข็ม</label>
+  <label><input type="radio" name="q1" value="b"> วัตถุต้องมีมวลเท่ากันทั้งสองด้าน</label>
+  <label><input type="radio" name="q1" value="c"> แรงทุกแรงต้องมีค่าเป็นศูนย์</label>
+ </div>
+ <div class="quiz-q"><p>2. หากเพิ่มระยะจากจุดหมุน โดยแรงมีขนาดเท่าเดิม โมเมนต์จะเป็นอย่างไร</p>
+  <label><input type="radio" name="q2" value="a"> ลดลง</label>
+  <label><input type="radio" name="q2" value="b"> เพิ่มขึ้น</label>
+  <label><input type="radio" name="q2" value="c"> คงเดิมเสมอ</label>
+ </div>
+ <div class="quiz-q"><p>3. มวล 30 kg อยู่ห่างจุดหมุน 1.2 m และมวล 40 kg อยู่อีกด้านหนึ่ง ต้องห่างจุดหมุนเท่าใดจึงสมดุล</p>
+  <label><input type="radio" name="q3" value="a"> 0.6 m</label>
+  <label><input type="radio" name="q3" value="b"> 0.9 m</label>
+  <label><input type="radio" name="q3" value="c"> 1.2 m</label>
+ </div>
+ <button onclick="grade()">ตรวจคำตอบ</button>
+ <button class="secondary" onclick="resetQuiz()">ทำอีกครั้ง</button>
+ <div id="result"></div>
+ <details style="margin-top:14px"><summary><b>เฉลยพร้อมเหตุผล</b></summary>
+  <ol class="sub">
+   <li><b>ข้อ 1 ตอบ a</b> เพราะผลรวมโมเมนต์ตามเข็มและทวนเข็มต้องสมดุลกัน</li>
+   <li><b>ข้อ 2 ตอบ b</b> เมื่อแรงเท่าเดิม การเพิ่มระยะตั้งฉากทำให้โมเมนต์เพิ่มขึ้น</li>
+   <li><b>ข้อ 3 ตอบ b (0.9 m)</b> จาก 30 × 1.2 = 40 × ระยะ จึงได้ระยะ = 0.9 m</li>
+  </ol>
+ </details>
+</section>
+<footer>สื่อการเรียนรู้ฟิสิกส์ ม.4 | สมดุลกล • ทดลอง สังเกต วิเคราะห์ และสรุป</footer>
+</main>
+<script>
+const ids=['ml','ll','mr','lr'];const el=id=>document.getElementById(id);
+function update(){
+ const [ml,ll,mr,lr]=ids.map(id=>+el(id).value);
+ ids.forEach((id,i)=>el(id+'v').textContent=(+el(id).value).toFixed(1));
+ const left=ml*9.8*ll,right=mr*9.8*lr,d=left-right;
+ el('tl').textContent=left.toFixed(1)+' N·m';el('tr').textContent=right.toFixed(1)+' N·m';el('diff').textContent=Math.abs(d).toFixed(1)+' N·m';
+ const angle=Math.max(-13,Math.min(13,-d/Math.max(left+right,1)*55));
+ el('beam').setAttribute('transform',`rotate(${angle} 240 155)`);
+ el('leftMass').textContent=ml+' kg';el('rightMass').textContent=mr+' kg';
+ const s=el('status');
+ if(Math.abs(d)<0.8){s.className='status good';s.textContent='คานสมดุลการหมุน — โมเมนต์ตามเข็มเท่ากับโมเมนต์ทวนเข็ม';}
+ else if(d>0){s.className='status bad';s.textContent='ด้านซ้ายมีโมเมนต์มากกว่า คานจึงเอียงลงทางซ้าย';}
+ else{s.className='status bad';s.textContent='ด้านขวามีโมเมนต์มากกว่า คานจึงเอียงลงทางขวา';}
+ el('analysis').textContent=`ขณะนี้ด้านซ้ายมีโมเมนต์ ${left.toFixed(1)} N·m และด้านขวามีโมเมนต์ ${right.toFixed(1)} N·m — ${Math.abs(d)<0.8?'ทั้งสองด้านสมดุลกัน':d>0?'ด้านซ้ายมีแนวโน้มหมุนลง':'ด้านขวามีแนวโน้มหมุนลง'}`;
+ draw(left,right);
+}
+function draw(a,b){
+ const c=el('chart'),ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle='#d7e4e8';ctx.lineWidth=1;for(let i=0;i<5;i++){let y=25+i*48;ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-20,y);ctx.stroke();}
+ const max=Math.max(a,b,10)*1.25,base=h-35,scale=(h-75)/max;
+ ctx.fillStyle='#e8a92b';ctx.fillRect(190,base-a*scale,150,a*scale);
+ ctx.fillStyle='#db6b57';ctx.fillRect(550,base-b*scale,150,b*scale);
+ ctx.fillStyle='#183044';ctx.font='bold 18px Tahoma';ctx.textAlign='center';ctx.fillText('โมเมนต์ซ้าย',265,h-9);ctx.fillText('โมเมนต์ขวา',625,h-9);
+ ctx.font='bold 16px Tahoma';ctx.fillText(a.toFixed(1)+' N·m',265,Math.max(18,base-a*scale-10));ctx.fillText(b.toFixed(1)+' N·m',625,Math.max(18,base-b*scale-10));
+}
+ids.forEach(id=>el(id).addEventListener('input',update));
+function resetSim(){el('ml').value=2;el('ll').value=1.5;el('mr').value=3;el('lr').value=1;update();el('hint').textContent='';el('solution').textContent='';}
+function setChallenge(){const ml=[2,3,4,5][Math.floor(Math.random()*4)],ll=[0.8,1,1.2,1.5][Math.floor(Math.random()*4)],mr=[2,3,4,5][Math.floor(Math.random()*4)],lr=[0.8,1,1.2,1.5][Math.floor(Math.random()*4)];el('ml').value=ml;el('ll').value=ll;el('mr').value=mr;el('lr').value=lr;update();}
+function showHint(){el('hint').textContent='คำใบ้: เปรียบเทียบผลคูณของมวลกับระยะจากจุดหมุนทั้งสองด้าน โดยค่า g เหมือนกันจึงตัดออกได้';}
+function showSolution(){el('solution').textContent='แนวคิด: 30 × 1.2 = 40 × r ดังนั้น r = 36 ÷ 40 = 0.9 เมตร';}
+function grade(){const ans={q1:'a',q2:'b',q3:'b'};let score=0;for(const q in ans){const v=document.querySelector(`input[name="${q}"]:checked`);if(v&&v.value===ans[q])score++;}el('result').textContent=`ได้ ${score}/3 คะแนน — `+(score===3?'ยอดเยี่ยม! เข้าใจสมดุลการหมุนแล้ว':score===2?'ดีมาก ทบทวนอีกหนึ่งประเด็น':'ลองกลับไปทดลองในห้องคานกระดก แล้วทำแบบประเมินอีกครั้ง');}
+function resetQuiz(){document.querySelectorAll('.quiz-q input').forEach(x=>x.checked=false);el('result').textContent='';}
+update();
+</script>
+</body></html>
